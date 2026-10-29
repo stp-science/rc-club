@@ -1,3 +1,4 @@
+import { renderDerby } from './derby.js?v=20261030';
 import { firebaseConfig, adminEmail } from './firebase-config.js';
 const $ = (id) => document.getElementById(id);
 const els = {
@@ -72,6 +73,8 @@ function encodeForFirestore(source) {
 const payload = clone(source);
 payload.currentRaceJson = payload.currentRace ? JSON.stringify(payload.currentRace) : null;
 delete payload.currentRace;
+payload.derbyJson = payload.derby ? JSON.stringify(payload.derby) : null;
+delete payload.derby;
 return payload;
 }
 function decodeFromFirestore(source) {
@@ -87,6 +90,11 @@ restored.currentRace = null;
 restored.currentRace = null;
 }
 delete restored.currentRaceJson;
+if (restored.derbyJson) {
+try { restored.derby = JSON.parse(restored.derbyJson); }
+catch (error) { console.error('Could not restore derby:', error); }
+}
+delete restored.derbyJson;
 return restored;
 }
 function driverName(id) {
@@ -651,6 +659,7 @@ attendance.delete(student.id);
 }
 const finale = data.weeks.find(w => Number(w.number) === 8);
 if (finale) { finale.date = '16th October 2026'; finale.details = 'Three qualifying races with up to four drivers each. Three winners and the fastest runner-up reach the final. Final points: 20, 16, 12, 10.'; }
+renderDerby({data, isAdmin, saveData, renderAll});
 renderStandings();
 renderCalendar();
 renderResults();
@@ -917,6 +926,8 @@ data = { title: "St Peter's RC Club Winter Championship 2026", scoring: [10,8,6,
 }
 attendance = new Set(activeStudents().map((student) => student.id));
 renderAll();
+if (location.hash === '#derby') setActiveTab('derby');
 await setupFirebase();
 }
 init();
+

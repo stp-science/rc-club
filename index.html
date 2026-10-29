@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./styles.css?v=20261015-compact2" />
   <link rel="stylesheet" href="./time-trial.css" />
   <link rel="stylesheet" href="./scoring-guide.css" />
+  <link rel="stylesheet" href="./derby.css?v=20261030" />
 <style>
 /* Also cover an already-generated draw using the earlier table markup. */
 #raceDisplay .race-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -38,6 +39,7 @@
   </header>
 
   <nav class="tabs" aria-label="RC Club sections">
+    <button class="tab" data-tab="derby">💥 Demolition Derby</button>
     <button class="tab active" data-tab="championship">🏆 Championship</button>
     <button class="tab" data-tab="race-day">🏁 Race Day</button>
     <button class="tab" data-tab="calendar">🗓️ Calendar</button>
@@ -46,6 +48,7 @@
   </nav>
 
   <main class="page-shell">
+    <section id="derby" class="panel tab-panel" aria-label="Demolition Derby tournament"></section>
     <section id="championship" class="panel tab-panel active">
       <div class="section-heading">
         <div>
@@ -219,7 +222,7 @@
     <span>🏁 Who will take the chequered flag?</span>
   </footer>
 
-  <script type="module" src="./app.js?v=20261016-confirmed-top-four"></script>
+  <script type="module" src="./app.js?v=20261030-derby"></script>
   <script type="module" src="./week-delete.js?v=20260915-1348"></script>
   <script type="module" src="./week3-trial.js?v=20260814-1258"></script>
   <script type="module" src="./add-zac-c.js?v=20260814-1258"></script>
